@@ -129,12 +129,12 @@ begin
     // Reset
     fMouseInfo := default(TMouseInfo);
 
-    GetRawInputData(aMsg.lParam, RID_INPUT, nil, dwSize, SizeOf(RAWINPUTHEADER));
+    GetRawInputData(HRAWINPUT(aMsg.lParam), RID_INPUT, nil, dwSize, SizeOf(RAWINPUTHEADER));
 
     if dwSize = 0 then
       ShowMessage('Can not allocate memory');
 
-    if GetRawInputData(aMsg.lParam, RID_INPUT, @ri, dwSize, SizeOf(RAWINPUTHEADER)) <> dwSize then
+    if GetRawInputData(HRAWINPUT(aMsg.lParam), RID_INPUT, @ri, dwSize, SizeOf(RAWINPUTHEADER)) <> dwSize then
       ShowMessage('GetRawInputData doesn''t return correct size !');
 
     if ri.header.dwType = RIM_TYPEMOUSE then
